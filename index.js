@@ -37,19 +37,19 @@ const changeFunc = (func) => {
     $numInput.value = "";
   }
 };
-const saveNum = (e) => {
-  console.log(e.code);
+const inputFunc = (e) => {
   if (isNaN(+e.target.value)) {
     $numInput.value = "";
   }
   if (e.code === "Equal") sumNum();
   if (e.code === "Minus") subNum();
   if (e.code === "keyX") multiNum();
-  if (e.code === "Slash") return;
+  if (e.code === "Slash") divNum();
   if (e.code === "Enter") equalNum();
 };
 const sumNum = () => {
   prevFunc = "+";
+  console.log(totalNum);
   changeFunc(prevFunc);
 };
 const subNum = () => {
@@ -98,11 +98,14 @@ const initState = () => {
   let prevNumArr = [];
   init = true;
   totalNum = 0;
+  prevFunc = "";
   $numInput.value = "";
 };
 
-$numInput.addEventListener("keyup", saveNum);
+$numInput.addEventListener("keyup", inputFunc);
 $sumBtn.addEventListener("click", sumNum);
 $subBtn.addEventListener("click", subNum);
+$multiBtn.addEventListener("click", multiNum);
+$divBtn.addEventListener("click", divNum);
 $equalBtn.addEventListener("click", equalNum);
 $initBtn.addEventListener("click", initState);
